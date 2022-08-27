@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace _4_function1
 {
@@ -6,8 +6,8 @@ namespace _4_function1
     {
         static void Main(string[] args)
         {
-            string[] fullName = {"Фамилия Имя Отчество", "Смирнов Николай Николаевич", "Петров Пётр Иванович", "Целиков Павел Сергеевич"};
-            string[] position = {"Должность", "Программист", "Грузчик", "Водитель"};
+            string[] fullName = { "Фамилия Имя Отчество", "Смирнов Николай Николаевич", "Петров Пётр Иванович", "Целиков Павел Сергеевич" };
+            string[] position = { "Должность", "Программист", "Грузчик", "Водитель" };
             bool canExitApp = true;
             string userInput;
 
@@ -25,7 +25,7 @@ namespace _4_function1
                         AddDossier(ref fullName, ref position);
                         break;
                     case "2":
-                        DefaultMessege(fullName, position);
+                        OutputAllDossiers(fullName, position);
                         break;
                     case "3":
                         DeleteDossier(ref fullName, ref position);
@@ -37,7 +37,7 @@ namespace _4_function1
                         canExitApp = false;
                         break;
                     default:
-                        DefaultMessege(fullName, position);
+                        OutputAllDossiers(fullName, position);
                         break;
                 }
             }
@@ -65,7 +65,7 @@ namespace _4_function1
             Console.WriteLine("|||||||||------4)ПОИСК ПО ФАМИЛИИ--------||||||||||");
             Console.WriteLine("|||||||||___________5)ВЫХОД______________||||||||||");
         }
-        static void DefaultMessege(string[] fullName, string[] position)
+        static void OutputAllDossiers(string[] fullName, string[] position)
         {
             Console.Clear();
             ShowMenu();
@@ -73,30 +73,25 @@ namespace _4_function1
         }
         static string[] AddArray(string[] array, int arrayLength, string stringText)
         {
-            string[] newTemp = new string[arrayLength];
+            string[] newArray = new string[arrayLength];
 
             for (int i = 0; i < array.Length; i++)
             {
-                newTemp[i] = array[i];
+                newArray[i] = array[i];
             }
-            newTemp[newTemp.Length - 1] = stringText;
-
-            return newTemp;
+            newArray[newArray.Length - 1] = stringText;
+            return newArray;
         }
         static void AddDossier(ref string[] fullName, ref string[] position)
         {
-            string surname;
             Console.WriteLine("Введите фамилию: ");
-            surname = Console.ReadLine();
-            string name;
+            string surname = Console.ReadLine();
             Console.WriteLine("Введите имя: ");
-            name = Console.ReadLine();
-            string patronymic;
+            string name = Console.ReadLine();
             Console.WriteLine("Введите отчество: ");
-            patronymic = Console.ReadLine();
-            string title;
+            string patronymic = Console.ReadLine();
             Console.WriteLine("Введите должность: ");
-            title = Console.ReadLine();
+            string title = Console.ReadLine();
 
             string humanData = surname + " " + name + " " + patronymic;
             int increment = 1;
@@ -106,18 +101,18 @@ namespace _4_function1
         }
         static string[] DeleteArray(string[] array, int arrayLength, int userInput)
         {
-            string[] newTemp = new string[arrayLength];
-            int temp = 0;
+            string[] newArray = new string[arrayLength];
+            int count = 0;
 
             for (int i = 0; i < array.Length; i++)
             {
                 if (userInput != i)
                 {
-                    newTemp[temp] = array[i];
-                    temp++;
+                    newArray[count] = array[i];
+                    count++;
                 }
             }
-            return newTemp;
+            return newArray;
         }
         static void DeleteDossier(ref string[] fullName, ref string[] position)
         {
@@ -127,15 +122,15 @@ namespace _4_function1
             while (isContinueCycle)
             {
                 Console.Write("Введите номер доссье для удаления: ");
-                string temp = Console.ReadLine();
+                string number = Console.ReadLine();
 
-                for (int i = 0; i < temp.Length; i++)
+                for (int i = 0; i < number.Length; i++)
                 {
-                    if (char.IsNumber(temp, i))
+                    if (char.IsNumber(number, i))
                     {
-                        if (temp.Length - 1 == i)
+                        if (number.Length - 1 == i)
                         {
-                            userInput = int.Parse(temp);
+                            userInput = int.Parse(number);
                         }
                         if (userInput < fullName.Length)
                         {
@@ -144,13 +139,13 @@ namespace _4_function1
                         else
                         {
                             Console.WriteLine("Вы ввели не верный номер.");
-                            temp = "";
+                            number = "";
                             userInput = 0;
                         }
                     }
                     else
                     {
-                        temp = "";
+                        number = "";
                         Console.Write("Для удаления введите номер. ");
                         Console.WriteLine();
                     }
@@ -164,7 +159,7 @@ namespace _4_function1
         static bool SearchLastName(string[] fullName, string[] positions)
         {
             bool isContinueCycle = true;
-            int emptyValue = 0;
+            int value = 0;
 
             Console.Write("Введите фамилию для поиска доссье: ");
             string userInput = Console.ReadLine();
@@ -174,16 +169,16 @@ namespace _4_function1
                 if (userInput == fullName[i].Split(' ')[0])
                 {
                     isContinueCycle = false;
-                    emptyValue = i;
+                    value = i;
                 }
             }
             if (isContinueCycle == false)
             {
-                Console.WriteLine(fullName[emptyValue] + " " + positions[emptyValue]);
+                Console.WriteLine(fullName[value] + " " + positions[value]);
             }
             else
             {
-                Console.WriteLine(userInput + " - отсутствует в списке доссье");
+                Console.WriteLine(userInput + " - отсутствует в списке доссье.");
             }
             return isContinueCycle;
         }
