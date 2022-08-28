@@ -6,7 +6,7 @@ namespace _4_function1
     {
         static void Main(string[] args)
         {
-            string[] fullName = { "Фамилия Имя Отчество", "Смирнов Николай Николаевич", "Петров Пётр Иванович", "Целиков Павел Сергеевич" };
+            string[] fio = { "Фамилия Имя Отчество", "Смирнов Николай Николаевич", "Петров Пётр Иванович", "Целиков Павел Сергеевич" };
             string[] position = { "Должность", "Программист", "Грузчик", "Водитель" };
             bool canExitApp = true;
             string userInput;
@@ -22,22 +22,22 @@ namespace _4_function1
                 switch (userInput)
                 {
                     case "1":
-                        AddDossier(ref fullName, ref position);
+                        AddDossier(ref fio, ref position);
                         break;
                     case "2":
-                        OutputAllDossiers(fullName, position);
+                        OutputAllDossiers(fio, position);
                         break;
                     case "3":
-                        DeleteDossier(ref fullName, ref position);
+                        DeleteDossier(ref fio, ref position);
                         break;
                     case "4":
-                        SearchLastName(fullName, position);
+                        SearchLastName(fio, position);
                         break;
                     case "5":
                         canExitApp = false;
                         break;
                     default:
-                        OutputAllDossiers(fullName, position);
+                        OutputAllDossiers(fio, position);
                         break;
                 }
             }
@@ -71,7 +71,7 @@ namespace _4_function1
             ShowMenu();
             ShowDossier(fullName, position);
         }
-        static string[] AddArray(string[] array, int arrayLength, string stringText)
+        static void AddArray(ref string[] array,int arrayLength)
         {
             string[] newArray = new string[arrayLength];
 
@@ -79,25 +79,18 @@ namespace _4_function1
             {
                 newArray[i] = array[i];
             }
-            newArray[newArray.Length - 1] = stringText;
-            return newArray;
+
+            array = newArray;
         }
-        static void AddDossier(ref string[] fullName, ref string[] position)
+        static void AddDossier(ref string[] fio,ref string[] position)
         {
-            Console.WriteLine("Введите фамилию: ");
-            string surname = Console.ReadLine();
-            Console.WriteLine("Введите имя: ");
-            string name = Console.ReadLine();
-            Console.WriteLine("Введите отчество: ");
-            string patronymic = Console.ReadLine();
+            Console.WriteLine("Введите ФИО: ");
+            AddArray(ref fio, fio.Length + 1);
+            fio[fio.Length - 1] = Console.ReadLine();
+
             Console.WriteLine("Введите должность: ");
-            string title = Console.ReadLine();
-
-            string humanData = surname + " " + name + " " + patronymic;
-            int increment = 1;
-
-            fullName = AddArray(fullName, fullName.Length + increment, humanData);
-            position = AddArray(position, position.Length + increment, title);
+            AddArray(ref position, position.Length + 1);
+            position[position.Length - 1] = Console.ReadLine();
         }
         static string[] DeleteArray(string[] array, int arrayLength, int userInput)
         {
@@ -114,7 +107,7 @@ namespace _4_function1
             }
             return newArray;
         }
-        static void DeleteDossier(ref string[] fullName, ref string[] position)
+        static void DeleteDossier(ref string[] fio, ref string[] position)
         {
             bool isContinueCycle = true;
             int userInput = 0;
@@ -132,7 +125,7 @@ namespace _4_function1
                         {
                             userInput = int.Parse(number);
                         }
-                        if (userInput < fullName.Length)
+                        if (userInput < fio.Length)
                         {
                             isContinueCycle = false;
                         }
@@ -153,10 +146,10 @@ namespace _4_function1
             }
             int increment = -1;
 
-            fullName = DeleteArray(fullName, fullName.Length + increment, userInput);
+            fio = DeleteArray(fio, fio.Length + increment, userInput);
             position = DeleteArray(position, position.Length + increment, userInput);
         }
-        static bool SearchLastName(string[] fullName, string[] positions)
+        static bool SearchLastName(string[] fio, string[] positions)
         {
             bool isContinueCycle = true;
             int value = 0;
@@ -164,9 +157,9 @@ namespace _4_function1
             Console.Write("Введите фамилию для поиска доссье: ");
             string userInput = Console.ReadLine();
 
-            for (int i = 0; i < fullName.Length; i++)
+            for (int i = 0; i < fio.Length; i++)
             {
-                if (userInput == fullName[i].Split(' ')[0])
+                if (userInput == fio[i].Split(' ')[0])
                 {
                     isContinueCycle = false;
                     value = i;
@@ -174,7 +167,7 @@ namespace _4_function1
             }
             if (isContinueCycle == false)
             {
-                Console.WriteLine(fullName[value] + " " + positions[value]);
+                Console.WriteLine(fio[value] + " " + positions[value]);
             }
             else
             {
