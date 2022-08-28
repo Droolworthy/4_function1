@@ -22,7 +22,7 @@ namespace _4_function1
                 switch (userInput)
                 {
                     case "1":
-                        AddDossier(ref fio, ref position);
+                        FillingArray(ref fio, ref position);
                         break;
                     case "2":
                         OutputAllDossiers(fio, position);
@@ -85,13 +85,13 @@ namespace _4_function1
         static void FillingArray(ref string[] fio, ref string[] position)
         {
             Console.WriteLine("Введите ФИО: ");
-            
-            FillingArray(ref fio, fio.Length + 1);
+
+            AddArray(ref fio, fio.Length + 1);
             fio[fio.Length - 1] = Console.ReadLine();
 
             Console.WriteLine("Введите должность: ");
-            
-            FillingArray(ref position, position.Length + 1);
+
+            AddArray(ref position, position.Length + 1);
             position[position.Length - 1] = Console.ReadLine();
         }
         static string[] DeleteArray(string[] array, int arrayLength, int userInput)
@@ -107,6 +107,7 @@ namespace _4_function1
                     count++;
                 }
             }
+
             return newArray;
         }
         static void DeleteDossier(ref string[] fio, ref string[] position)
