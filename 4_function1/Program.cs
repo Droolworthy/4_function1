@@ -42,17 +42,17 @@ namespace _4_function1
                 }
             }
         }
-        static void ShowDossier(string[] fullName, string[] position)
+        static void ShowDossier(string[] fio, string[] position)
         {
-            for (int i = 0; i < fullName.Length; i++)
+            for (int i = 0; i < fio.Length; i++)
             {
                 if (i != 0)
                 {
-                    Console.WriteLine(i + " " + fullName[i] + " " + position[i]);
+                    Console.WriteLine(i + " " + fio[i] + " " + position[i]);
                 }
                 else
                 {
-                    Console.WriteLine("  " + fullName[i] + " " + position[i]);
+                    Console.WriteLine("  " + fio[i] + " " + position[i]);
                 }
             }
         }
@@ -65,11 +65,11 @@ namespace _4_function1
             Console.WriteLine("|||||||||------4)ПОИСК ПО ФАМИЛИИ--------||||||||||");
             Console.WriteLine("|||||||||___________5)ВЫХОД______________||||||||||");
         }
-        static void OutputAllDossiers(string[] fullName, string[] position)
+        static void OutputAllDossiers(string[] fio, string[] position)
         {
             Console.Clear();
             ShowMenu();
-            ShowDossier(fullName, position);
+            ShowDossier(fio, position);
         }
         static void AddArray(ref string[] array,int arrayLength)
         {
@@ -82,7 +82,7 @@ namespace _4_function1
 
             array = newArray;
         }
-        static void AddDossier(ref string[] fio,ref string[] position)
+        static void AddDossier(ref string[] fio, ref string[] position)
         {
             Console.WriteLine("Введите ФИО: ");
             AddArray(ref fio, fio.Length + 1);
