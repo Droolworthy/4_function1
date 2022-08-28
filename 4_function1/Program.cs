@@ -82,16 +82,16 @@ namespace _4_function1
 
             array = newArray;
         }
-        static void AddDossier(ref string[] fio, ref string[] position)
+        static void FillingArray(ref string[] fio, ref string[] position)
         {
             Console.WriteLine("Введите ФИО: ");
             
-            AddArray(ref fio, fio.Length + 1);
+            FillingArray(ref fio, fio.Length + 1);
             fio[fio.Length - 1] = Console.ReadLine();
 
             Console.WriteLine("Введите должность: ");
             
-            AddArray(ref position, position.Length + 1);
+            FillingArray(ref position, position.Length + 1);
             position[position.Length - 1] = Console.ReadLine();
         }
         static string[] DeleteArray(string[] array, int arrayLength, int userInput)
