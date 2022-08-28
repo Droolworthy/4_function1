@@ -85,10 +85,12 @@ namespace _4_function1
         static void AddDossier(ref string[] fio, ref string[] position)
         {
             Console.WriteLine("Введите ФИО: ");
+            
             AddArray(ref fio, fio.Length + 1);
             fio[fio.Length - 1] = Console.ReadLine();
 
             Console.WriteLine("Введите должность: ");
+            
             AddArray(ref position, position.Length + 1);
             position[position.Length - 1] = Console.ReadLine();
         }
