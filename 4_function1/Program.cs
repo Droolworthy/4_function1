@@ -42,6 +42,7 @@ namespace _4_function1
                 }
             }
         }
+
         static void ShowDossier(string[] fio, string[] position)
         {
             for (int i = 0; i < fio.Length; i++)
@@ -56,6 +57,7 @@ namespace _4_function1
                 }
             }
         }
+
         static void ShowMenu()
         {
             Console.WriteLine("==========M--------Е---------Н--------Ю============");
@@ -65,12 +67,14 @@ namespace _4_function1
             Console.WriteLine("|||||||||------4)ПОИСК ПО ФАМИЛИИ--------||||||||||");
             Console.WriteLine("|||||||||___________5)ВЫХОД______________||||||||||");
         }
+
         static void OutputAllDossiers(string[] fio, string[] position)
         {
             Console.Clear();
             ShowMenu();
             ShowDossier(fio, position);
         }
+
         static void AddArray(ref string[] array,int arrayLength)
         {
             string[] newArray = new string[arrayLength];
@@ -82,18 +86,18 @@ namespace _4_function1
 
             array = newArray;
         }
+
         static void FillingArray(ref string[] fio, ref string[] position)
         {
             Console.WriteLine("Введите ФИО: ");
-
             AddArray(ref fio, fio.Length + 1);
             fio[fio.Length - 1] = Console.ReadLine();
 
             Console.WriteLine("Введите должность: ");
-
             AddArray(ref position, position.Length + 1);
             position[position.Length - 1] = Console.ReadLine();
         }
+
         static string[] DeleteArray(string[] array, int arrayLength, int userInput)
         {
             string[] newArray = new string[arrayLength];
@@ -110,6 +114,7 @@ namespace _4_function1
 
             return newArray;
         }
+
         static void DeleteDossier(ref string[] fio, ref string[] position)
         {
             bool isContinueCycle = true;
@@ -147,11 +152,13 @@ namespace _4_function1
                     }
                 }
             }
+
             int increment = -1;
 
             fio = DeleteArray(fio, fio.Length + increment, userInput);
             position = DeleteArray(position, position.Length + increment, userInput);
         }
+
         static bool SearchLastName(string[] fio, string[] positions)
         {
             bool isContinueCycle = true;
@@ -176,6 +183,7 @@ namespace _4_function1
             {
                 Console.WriteLine(userInput + " - отсутствует в списке доссье.");
             }
+
             return isContinueCycle;
         }
     }
