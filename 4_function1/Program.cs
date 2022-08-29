@@ -133,6 +133,7 @@ namespace _4_function1
                         {
                             userInput = int.Parse(number);
                         }
+
                         if (userInput < fio.Length)
                         {
                             isContinueCycle = false;
@@ -175,6 +176,7 @@ namespace _4_function1
                     value = i;
                 }
             }
+
             if (isContinueCycle == false)
             {
                 Console.WriteLine(fio[value] + " " + positions[value]);
