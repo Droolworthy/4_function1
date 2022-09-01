@@ -22,7 +22,7 @@ namespace _4_function1
                 switch (userInput)
                 {
                     case "1":
-                        FillingArray(ref fio, ref position);
+                        InputAddingInfo(ref fio, ref position);
                         break;
                     case "2":
                         OutputAllDossiers(fio, position);
@@ -89,7 +89,7 @@ namespace _4_function1
             return array;
         }
 
-        static void FillingArray(ref string[] fio, ref string[] position)
+        static void InputAddingInfo(ref string[] fio, ref string[] position)
         {
             Console.WriteLine("Введите ФИО: ");
             string newFio = Console.ReadLine();
