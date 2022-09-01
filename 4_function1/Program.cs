@@ -75,41 +75,44 @@ namespace _4_function1
             ShowDossier(fio, position);
         }
 
-        static void AddArray(ref string[] array,int arrayLength)
+        static string[] AddArray(string[] array, string stringText)
         {
-            string[] newArray = new string[arrayLength];
+            string[] tempArray = new string[array.Length + 1];
 
             for (int i = 0; i < array.Length; i++)
             {
-                newArray[i] = array[i];
+                tempArray[i] = array[i];
             }
 
-            array = newArray;
+            array = tempArray;
+            array[array.Length - 1] = stringText;
+            return array;
         }
 
         static void FillingArray(ref string[] fio, ref string[] position)
         {
             Console.WriteLine("Введите ФИО: ");
-            AddArray(ref fio, fio.Length + 1);
-            fio[fio.Length - 1] = Console.ReadLine();
+            string newFio = Console.ReadLine();
+            fio = AddArray(fio, newFio);
 
             Console.WriteLine("Введите должность: ");
-            AddArray(ref position, position.Length + 1);
-            position[position.Length - 1] = Console.ReadLine();
+            string newPosition = Console.ReadLine();
+            position = AddArray(position, newPosition);
+            Console.WriteLine("Досье добавлено!");
         }
 
-        static string[] DeleteArray(string[] array, int arrayLength, int userInput)
+        static string[] DeleteArray(string[] array, int userInput)
         {
-            string[] newArray = new string[arrayLength];
-            int count = 0;
+            string[] newArray = new string[array.Length - 1];
 
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i < userInput; i++)
             {
-                if (userInput != i)
-                {
-                    newArray[count] = array[i];
-                    count++;
-                }
+                newArray[i] = array[i];
+            }
+
+            for (int i = userInput; i < newArray.Length; i++)
+            {
+                newArray[i] = array[i + 1];
             }
 
             return newArray;
@@ -117,76 +120,31 @@ namespace _4_function1
 
         static void DeleteDossier(ref string[] fio, ref string[] position)
         {
-            bool isContinueCycle = true;
-            int userInput = 0;
-
-            while (isContinueCycle)
-            {
-                Console.Write("Введите номер доссье для удаления: ");
-                string number = Console.ReadLine();
-
-                for (int i = 0; i < number.Length; i++)
-                {
-                    if (char.IsNumber(number, i))
-                    {
-                        if (number.Length - 1 == i)
-                        {
-                            userInput = int.Parse(number);
-                        }
-
-                        if (userInput < fio.Length)
-                        {
-                            isContinueCycle = false;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Вы ввели не верный номер.");
-                            number = "";
-                            userInput = 0;
-                        }
-                    }
-                    else
-                    {
-                        number = "";
-                        Console.Write("Для удаления введите номер. ");
-                        Console.WriteLine();
-                    }
-                }
-            }
-
-            int increment = -1;
-
-            fio = DeleteArray(fio, fio.Length + increment, userInput);
-            position = DeleteArray(position, position.Length + increment, userInput);
+            Console.Write("Введите номер доссье для удаления: ");
+            int userInput = Convert.ToInt32(Console.ReadLine()) - 1;
+            fio = DeleteArray(fio, userInput);
+            position = DeleteArray(position, userInput);
+            Console.WriteLine("Досье удалено!");
         }
 
-        static bool SearchLastName(string[] fio, string[] positions)
+        static void SearchLastName(string[] fio, string[] positions)
         {
-            bool isContinueCycle = true;
-            int value = 0;
-
             Console.Write("Введите фамилию для поиска доссье: ");
             string userInput = Console.ReadLine();
 
             for (int i = 0; i < fio.Length; i++)
             {
-                if (userInput == fio[i].Split(' ')[0])
+                string[] splittedNames = fio[i].Split();
+
+                foreach (string name in splittedNames)
                 {
-                    isContinueCycle = false;
-                    value = i;
+                    if (name.ToLower() == userInput.ToLower())
+                    {
+                        Console.WriteLine($"Досье {i + 1}: {fio[i]} - {positions[i]} ");
+                        Console.WriteLine();
+                    }
                 }
             }
-
-            if (isContinueCycle == false)
-            {
-                Console.WriteLine(fio[value] + " " + positions[value]);
-            }
-            else
-            {
-                Console.WriteLine(userInput + " - отсутствует в списке доссье.");
-            }
-
-            return isContinueCycle;
         }
     }
 }
